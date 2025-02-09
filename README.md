@@ -3,6 +3,8 @@ This is an [iNew Tech](https://www.inewtech.in/) assignment.
 # Getting Started
 Go to the project root directory and run `npm i` to install all necessary packagaes.
 
+Use the SQL file in `_resources` to create the database & tables, insert records, and create the trigger.
+
 Create a .env or .env.local file in the project's root directory with the following information:
 ```
 DB_HOST=localhost
