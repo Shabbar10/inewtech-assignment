@@ -55,10 +55,6 @@ function CustomerView({ params }) {
           `/api/transactions?customer_id=${id}`
         );
 
-        // if (!resCustomer.ok || !resTransactions.ok) {
-        //   throw new Error("Failed to fetch data");
-        // }
-
         const customerData = await resCustomer.json();
         const transactionsData = await resTransactions.json();
 
@@ -66,7 +62,7 @@ function CustomerView({ params }) {
           ? customerData[0]
           : customerData;
 
-        console.log("Transactions data:", transactionsData); // Debug log
+        console.log("Transactions data:", transactionsData); 
 
         setCustomer(customerObj);
         setTransactions(
@@ -97,7 +93,7 @@ function CustomerView({ params }) {
 
       if (!res.ok) throw new Error("Failed to delete customers");
 
-      setTransactions((prev) => prev.filter((c) => c.id !== id)); // Update state
+      setTransactions((prev) => prev.filter((c) => c.id !== id));
     } catch (error) {
       console.error("Error deleting customers:", error);
       alert("Error deleting customers");

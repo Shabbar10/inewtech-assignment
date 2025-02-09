@@ -60,7 +60,6 @@ export default function CreateCustomer() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name field */}
             <div>
               <Label>Name</Label>
               <Input 
@@ -72,7 +71,6 @@ export default function CreateCustomer() {
               />
             </div>
 
-            {/* Contact Information */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label>Contact Person</Label>
@@ -116,7 +114,6 @@ export default function CreateCustomer() {
               </div>
             </div>
 
-            {/* Address Information */}
             <div>
               <Label>Address</Label>
               <Input 
@@ -138,7 +135,6 @@ export default function CreateCustomer() {
               />
             </div>
 
-            {/* Location Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <Label>City</Label>
@@ -169,7 +165,6 @@ export default function CreateCustomer() {
               </div>
             </div>
 
-            {/* Business Information */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <Label>GST</Label>
@@ -200,7 +195,6 @@ export default function CreateCustomer() {
               </div>
             </div>
 
-            {/* Additional Information */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label>Discount</Label>
@@ -222,7 +216,6 @@ export default function CreateCustomer() {
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
               <Button 
                 type="button" 

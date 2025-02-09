@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default function EditCustomer() {
   const router = useRouter();
   const { id } = useParams(); 
-  const customerId = parseInt(id, 10); // Convert id to a number
+  const customerId = parseInt(id, 10);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -109,7 +109,6 @@ return (
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Single column fields */}
             <div className="space-y-4">
               <div>
                 <Label>Name</Label>
@@ -122,7 +121,6 @@ return (
                 />
               </div>
 
-              {/* Contact Info Section */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Contact Person</Label>
@@ -166,7 +164,6 @@ return (
                 </div>
               </div>
 
-              {/* Address Section */}
               <div>
                 <Label>Address</Label>
                 <Input
@@ -188,7 +185,6 @@ return (
                 />
               </div>
 
-              {/* Location Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <Label>City</Label>
@@ -219,7 +215,6 @@ return (
                 </div>
               </div>
 
-              {/* Business Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <Label>GST</Label>
@@ -250,7 +245,6 @@ return (
                 </div>
               </div>
 
-              {/* Additional Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Discount</Label>
@@ -273,7 +267,6 @@ return (
               </div>
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
               <Button
                 type="button"
