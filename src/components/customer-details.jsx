@@ -7,8 +7,104 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Separator } from "@radix-ui/react-separator";
+import { useState, useEffect } from "react";
 
 function CustomerDetails({ customer }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="space-y-4">
+        {/* General Information */}
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-100 p-3 font-semibold text-center">
+            General Information
+          </div>
+          <div className="p-4 space-y-4">
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <div className="font-medium text-sm">ID</div>
+                <div>{customer.id}</div>
+              </div>
+              <div>
+                <div className="font-medium text-sm">Name</div>
+                <div>{customer.name}</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Contact</div>
+              <div>{customer.contact}</div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Email</div>
+              <div>{customer.email}</div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Address</div>
+              <div>{customer.address}</div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <div className="font-medium text-sm">City</div>
+                <div>{customer.city}</div>
+              </div>
+              <div>
+                <div className="font-medium text-sm">State</div>
+                <div>{customer.state}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <div className="font-medium text-sm">Pin Code</div>
+                <div>{customer.pin_code}</div>
+              </div>
+              <div>
+                <div className="font-medium text-sm">GST No.</div>
+                <div>{customer.gst}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Customer Type */}
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-100 p-3 font-semibold text-center">
+            Customer Type
+          </div>
+          <div className="p-4 space-y-4">
+            <div>
+              <div className="font-medium text-sm">Transport/Courier</div>
+              <div>{customer.transport}</div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Payment Type</div>
+              <div>{customer.payment_type}</div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Discount</div>
+              <div>{customer.discount}</div>
+            </div>
+            <div>
+              <div className="font-medium text-sm">Scheme</div>
+              <div>{customer.scheme}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Table className="border border-gray-300 shadow-md rounded-lg">
       <TableBody>

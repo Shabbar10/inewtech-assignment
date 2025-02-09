@@ -31,7 +31,21 @@ function CustomerView({ params }) {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     async function fetchCustomer() {
@@ -48,13 +62,11 @@ function CustomerView({ params }) {
         const customerData = await resCustomer.json();
         const transactionsData = await resTransactions.json();
 
-        // If customerData is an array, take the first item
         const customerObj = Array.isArray(customerData)
           ? customerData[0]
           : customerData;
 
         console.log("Transactions data:", transactionsData); // Debug log
-        console.log("Customer data:", customerObj); // Debug log
 
         setCustomer(customerObj);
         setTransactions(
@@ -92,6 +104,85 @@ function CustomerView({ params }) {
     }
   };
 
+  const filteredTransactions = transactions.filter((txn) =>
+    txn.item.toLowerCase().includes(search.toLocaleLowerCase())
+  );
+
+  if (isMobile) {
+    return (
+      <div className="p-4">
+        <h1 className="text-2xl mb-4">Customer Information</h1>
+        <CustomerDetails customer={customer} />
+        
+        <div className="mt-8">
+          <h2 className="text-xl font-bold mb-4">Transaction History</h2>
+          
+          <div className="flex flex-col gap-4 mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full pl-10 pr-4 py-2 border rounded-md"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            
+            <div className="flex gap-2">
+              <Button
+                className="flex-1"
+                variant="outline"
+                onClick={() => router.push(`/customers/${id}/newTxn?customer_id=${id}`)}
+              >
+                Add
+              </Button>
+              <Button
+                className="flex-1"
+                variant="outline"
+                onClick={() => alert("WIP")}
+              >
+                Download
+              </Button>
+            </div>
+          </div>
+
+          {filteredTransactions.length > 0 ? (
+            <div className="space-y-4">
+              {filteredTransactions.map((tx) => (
+                <div key={tx.id} className="border rounded-lg p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <div className="font-semibold">{tx.item}</div>
+                      <div className="text-sm text-gray-500">
+                        {formatDate(tx.transaction_date)}
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(tx.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div>Quantity: {tx.quantity}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No transactions found.</p>
+          )}
+        </div>
+
+        <div className="mt-8">
+          <Button asChild className="w-full">
+            <Link href="/customers">Back</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="text-5xl m-8">Customer Information</div>
@@ -109,6 +200,7 @@ function CustomerView({ params }) {
               type="text"
               placeholder="Search..."
               className="pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <Filter />
@@ -126,7 +218,7 @@ function CustomerView({ params }) {
         </div>
       </div>
       {transactions && transactions.length > 0 ? (
-        <div className="flex w-2/3">
+        <div className="flex">
           <Table className="border rounded-lg shadow-md mt-2">
             <TableHeader>
               <TableRow className="bg-gray-300">
@@ -137,7 +229,7 @@ function CustomerView({ params }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((tx, index) => (
+              {filteredTransactions.map((tx, index) => (
                 <TableRow
                   key={tx.id || index}
                   className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}

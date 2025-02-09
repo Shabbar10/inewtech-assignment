@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function CreateTransaction() {
   const searchParams = useSearchParams();
-  const customer_id = searchParams.get("customer_id")
+  const customer_id = searchParams.get("customer_id");
 
   const router = useRouter();
   const [txnData, setTxnData] = useState({
@@ -49,46 +49,48 @@ export default function CreateTransaction() {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto mt-8 p-6">
-      <CardHeader>
-        <CardTitle>Add New Transaction</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="grid gap-4">
-          <div className="flex flex-col gap-3">
-            <Label>Customer ID</Label>
-            <Label className="font-extrabold text-2xl">{customer_id}</Label>
-          </div>
-          <div className="mt-5">
-            <Label>Item</Label>
-            <Input
-              name="item"
-              value={txnData.item}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="">
-            <Label>Quantity</Label>
-            <Input
-              type="number"
-              name="quantity"
-              value={txnData.quantity}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex justify-end gap-2 mt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.push("/customers")}
-            >
-              Cancel
-            </Button>
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+    <div className="p-4 sm:p-6 md:p-8">
+      <Card className="w-full max-w-3xl mx-auto">
+        <CardHeader>
+          <CardTitle>Add New Transaction</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <Label>Customer ID</Label>
+              <Label className="mt-1">{customer_id}</Label>
+            </div>
+            <div className="mt-5">
+              <Label>Item</Label>
+              <Input
+                name="item"
+                value={txnData.item}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="">
+              <Label>Quantity</Label>
+              <Input
+                type="number"
+                name="quantity"
+                value={txnData.quantity}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex justify-end gap-2 mt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push("/customers")}
+              >
+                Cancel
+              </Button>
+              <Button type="submit">Save</Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

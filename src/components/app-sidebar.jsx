@@ -122,7 +122,7 @@ export function AppSidebar() {
     const pathName = usePathname();
 
   return (
-    <Sidebar collapsible="none">
+    <Sidebar collapsible="offcanvas">
     <span className="text-4xl p-4">Inventech</span>
     <a href="https://www.inewtech.in/" className="pl-4 mb-6 text-blue-500 underline">Inew Technologies</a>
       <SidebarContent>

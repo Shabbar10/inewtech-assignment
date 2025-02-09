@@ -88,7 +88,6 @@ export async function DELETE(req) {
 export async function PUT(req) {
   try {
     const data = await req.json();
-    console.log(data);
     const query = `
       UPDATE customers SET 
       address = ?, pin_code = ?, contact = ?, email = ?, whatsapp = ?, 
