@@ -1,4 +1,3 @@
-// CustomerTable.js
 "use client";
 import React from "react";
 import Link from "next/link";
@@ -13,7 +12,16 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
 
-function CustomerTable({ customers }) {
+const formatDate = (dateString) => {
+  if (!dateString) return;
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
+function CustomerTable({ customers, setCustomers }) {
   const router = useRouter();
 
   const handleDelete = async (name, contactPerson, router) => {
@@ -35,7 +43,6 @@ function CustomerTable({ customers }) {
     }
   };
 
-  // Mobile card view for small screens
   const MobileCard = ({ customer, index }) => (
     <div
       className="bg-white p-4 rounded-lg shadow mb-4 border sm:hidden"
@@ -84,14 +91,12 @@ function CustomerTable({ customers }) {
 
   return (
     <>
-      {/* Mobile Cards */}
       <div className="sm:hidden">
         {customers.map((customer, index) => (
           <MobileCard key={customer.id} customer={customer} index={index} />
         ))}
       </div>
 
-      {/* Desktop Table */}
       <div className="hidden sm:block">
         <Table>
           <TableHeader>
@@ -101,6 +106,7 @@ function CustomerTable({ customers }) {
               <TableHead>CONTACT PERSON</TableHead>
               <TableHead>CONTACT</TableHead>
               <TableHead>EMAIL</TableHead>
+              <TableHead>LAST PURCHASE DATE</TableHead>
               <TableHead></TableHead>
               <TableHead></TableHead>
             </TableRow>
@@ -119,6 +125,7 @@ function CustomerTable({ customers }) {
                 <TableCell>{customer.contact_person}</TableCell>
                 <TableCell>{customer.contact}</TableCell>
                 <TableCell>{customer.email}</TableCell>
+                <TableCell>{formatDate(customer.last_purchase_date)}</TableCell>
                 <TableCell>
                   <Button
                     className="bg-yellow-500"

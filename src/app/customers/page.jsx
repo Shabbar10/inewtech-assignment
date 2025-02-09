@@ -1,4 +1,3 @@
-// Customers.js
 "use client";
 import React, { useEffect, useState } from "react";
 import {
@@ -43,14 +42,12 @@ function Customers() {
 
   return (
     <>
-      {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full p-2 sm:p-4 gap-2 sm:gap-4 border-b border-gray-400">
         <div className="flex items-center pl-2 sm:pl-6 py-2 sm:py-4">
           <Star className="h-5 w-5" />
           <p className="pl-2 sm:pl-6 opacity-50">Customers</p>
         </div>
 
-        {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           className="sm:hidden"
@@ -59,11 +56,12 @@ function Customers() {
           <Menu className="h-6 w-6" />
         </Button>
 
-        {/* Header Actions */}
-        <div className={`
+        <div
+          className={`
           flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-10 py-2 sm:py-4 w-full sm:w-auto
-          ${showMobileMenu ? 'flex' : 'hidden sm:flex'}
-        `}>
+          ${showMobileMenu ? "flex" : "hidden sm:flex"}
+        `}
+        >
           <div className="flex flex-col items-start sm:items-end">
             <div className="text-lg sm:text-xl">Sept 24</div>
             <div className="text-xs">2024</div>
@@ -85,7 +83,6 @@ function Customers() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="w-full p-4 sm:p-8 flex flex-col">
         <div className="text-2xl sm:text-4xl mb-3 sm:mb-5">Customers</div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
@@ -107,7 +104,7 @@ function Customers() {
             >
               + Add
             </Button>
-            <Button variant="outline" className="flex-1 sm:flex-none">
+            <Button variant="outline" className="flex-1 sm:flex-none" onClick={() => {window.location.href = "/api/download/customers"}}>
               Download to Excel
             </Button>
           </div>
@@ -115,7 +112,10 @@ function Customers() {
       </div>
 
       <div className="px-4 sm:px-8 w-full overflow-x-auto">
-        <CustomerTable customers={filteredCustomers} />
+        <CustomerTable
+          customers={filteredCustomers}
+          setCustomers={setCustomers}
+        />
       </div>
     </>
   );

@@ -39,12 +39,12 @@ function CustomerView({ params }) {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -55,9 +55,9 @@ function CustomerView({ params }) {
           `/api/transactions?customer_id=${id}`
         );
 
-        if (!resCustomer.ok || !resTransactions.ok) {
-          throw new Error("Failed to fetch data");
-        }
+        // if (!resCustomer.ok || !resTransactions.ok) {
+        //   throw new Error("Failed to fetch data");
+        // }
 
         const customerData = await resCustomer.json();
         const transactionsData = await resTransactions.json();
@@ -113,10 +113,10 @@ function CustomerView({ params }) {
       <div className="p-4">
         <h1 className="text-2xl mb-4">Customer Information</h1>
         <CustomerDetails customer={customer} />
-        
+
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-4">Transaction History</h2>
-          
+
           <div className="flex flex-col gap-4 mb-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -127,19 +127,23 @@ function CustomerView({ params }) {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            
+
             <div className="flex gap-2">
               <Button
                 className="flex-1"
                 variant="outline"
-                onClick={() => router.push(`/customers/${id}/newTxn?customer_id=${id}`)}
+                onClick={() =>
+                  router.push(`/customers/${id}/newTxn?customer_id=${id}`)
+                }
               >
                 Add
               </Button>
               <Button
                 className="flex-1"
                 variant="outline"
-                onClick={() => alert("WIP")}
+                onClick={() => {
+                  window.location.href = `/api/download/transactions?customer_id=${customer.id}`;
+                }}
               >
                 Download
               </Button>
@@ -212,7 +216,12 @@ function CustomerView({ params }) {
           >
             + Add
           </Button>
-          <Button variant="outline" onClick={() => alert("WIP")}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              window.location.href = `/api/download/transactions?customer_id=${customer.id}`;
+            }}
+          >
             Download to Excel
           </Button>
         </div>
