@@ -18,8 +18,6 @@ export async function GET(req) {
       [customer_id]
     );
 
-    console.log(rows)
-
     if (rows.length === 0) {
       return NextResponse.json(
         { error: "Customer not found" },

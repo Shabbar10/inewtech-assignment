@@ -62,7 +62,6 @@ function CustomerView({ params }) {
           ? customerData[0]
           : customerData;
 
-        console.log("Transactions data:", transactionsData); 
 
         setCustomer(customerObj);
         setTransactions(
