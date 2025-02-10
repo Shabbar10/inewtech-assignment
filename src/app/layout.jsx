@@ -2,8 +2,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Menu } from "lucide-react";
+import { Menu, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar />
         <SidebarProvider className="flex min-h-screen">
           <div className="fixed top-4 left-4 z-50 lg:hidden">
             <SidebarTrigger>
