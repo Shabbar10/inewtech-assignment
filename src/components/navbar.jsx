@@ -7,7 +7,6 @@ import {
   RotateCcw,
   Bell,
   Search,
-  Filter,
   Menu,
 } from "lucide-react";
 import React, { useState } from "react";
@@ -16,8 +15,8 @@ import { Button } from "./ui/button";
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full p-2 sm:p-4 gap-2 sm:gap-4 border-b border-gray-400">
-      <div className="flex items-center pl-2 sm:pl-6 py-2 sm:py-4">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full p-2 pl-64 sm:p-4 gap-2 sm:gap-4 border-b border-gray-400">
+      <div className="flex justify-center items-center w-1/3 pl-2 sm:pl-6 py-2 sm:py-4">
         <Star className="h-5 w-5" />
         <p className="pl-2 sm:pl-6 opacity-50">Customers</p>
       </div>
